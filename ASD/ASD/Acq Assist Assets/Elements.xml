@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Acq Assist Assets">
+    <File Path="Acq Assist Assets\spAPI.unmin.js" Url="Acq Assist Assets/spAPI.unmin.js" />
+  </Module>
+</Elements>

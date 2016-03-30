@@ -1,0 +1,17 @@
+﻿.container{ margin: 10px; }
+.container > textarea {
+	margin-bottom: 20px;
+}
+.action{ 
+	margin-top: 50px;
+	margin-left: auto; 
+	margin-right: 0; 
+}
+.action > button { 
+	float: right; 
+}
+.pl-invalid {
+    /*background-color: #FCDEDC;*/
+    border-color: #e81123;
+    background-color: rgb(250, 255, 189);
+}

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Files\wfsvc\09fea07a4eed41cd943cbc17e68debb0\workflow.xaml" Target="Files\wfsvc\09fea07a4eed41cd943cbc17e68debb0\" Type="ElementFile" />
+    <ProjectItemFile Source="Files\wfsvc\09fea07a4eed41cd943cbc17e68debb0\WorkflowAssociation_3dd0e47e426a417bb9bef3687b36e2de" Target="Files\wfsvc\09fea07a4eed41cd943cbc17e68debb0\" Type="ElementFile" />
+    <ProjectItemFile Source="Elements.xml" Target="wfsvc09fea07a4eed41cd943cbc17e68debb0_\" Type="ElementManifest" />
+  </Files>
+  <ExtensionData>
+    <ExtensionDataItem Key="DeploymentConflictResolutionBehavior" Value="None" />
+  </ExtensionData>
+</ProjectItem>

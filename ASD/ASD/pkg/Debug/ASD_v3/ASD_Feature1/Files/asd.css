@@ -1,0 +1,125 @@
+﻿/*override ferc-formlable to right align text*/
+.ferc-formlabel {
+    font-size: 1em;
+    margin: 0px;
+    text-align: left;
+    width: 250px;
+    word-wrap: break-word;    
+}
+
+.ferc-formbody {
+    background: transparent;
+    padding: 6px 0px 0px 20px;
+}
+
+.headerSection{
+    position:relative;    
+    text-align:left;
+    font-family:"Source Sans Pro",sans-serif;
+    font-weight:bold;
+    font-size:26px;     
+}
+
+.validationErrorSection{
+    position:relative;    
+    font-family:"Source Sans Pro",sans-serif;
+    color:red;
+    display:none;
+}
+
+.invisible{
+    display:none;
+}
+
+/*override css for the label (column on the left)*/
+
+/*h3{*/
+    /*font-family:"Source Sans Pro",sans-serif;*/
+    /*font-weight:200;*/
+/*}*/
+
+
+
+.highlighYellow{
+    background-color:yellow;
+}
+
+.highlighGreen{
+    background-color:lawngreen;
+}
+
+.ms-accentText, .ms-accentText:visited, .ms-metadata{
+    /*color:#fff;*/
+}
+
+.ms-descriptiontext{
+    color:black;
+}
+/*override css for the label (column on the left)*/
+
+a, .ms-link:visited
+{
+    /*color:#fff;*/
+}
+
+.ms-toolbar
+{
+    /*background-color:#288de2;*/
+    color:black;
+}
+
+input[type="text"][disabled] {
+   color: black;
+   background-color:#CCCCCC;
+}
+
+select[disabled="disabled"] {
+   color: black;
+   background-color:#CCCCCC;
+}
+
+textarea[disabled="disabled"] {
+   color: black;
+   background-color:#CCCCCC;
+}
+
+
+div[disabled="disabled"] {
+   color: black;
+   background-color:#CCCCCC;
+}
+
+/*.has-error{
+    border-color: #e81123;
+    background-color: rgb(250, 255, 189);
+}*/
+
+/*input need its own*/ 
+input[type="text"].has-error,.has-error {
+    border-color: #e81123;
+    background-color: rgb(250, 255, 189);
+}
+table.has-error {
+    border: 1px solid red;
+    background-color: rgb(250, 255, 189);
+}
+
+
+.externalSection{        
+    float:left;
+    /*color:#fff;*/    
+    width:780px;    
+    margin-left:-180px;
+}
+
+
+.internalSection {        
+    /*color:#fff;*/    
+    width:850px;
+    margin-left:600px;
+    
+}
+
+
+
+

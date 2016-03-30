@@ -1,0 +1,19 @@
+﻿<!--//the script reference is different from the CustomForm.html becuase of the relative location of the sharepoint page-->
+<script src="../Lists/Scripts/jquery-1.11.1.min.js"></script>
+<script src="../Lists/Scripts/jquery-ui.min.js"></script>
+<script src="../Lists/Scripts/moment.min.js"></script>
+<script src="../Lists/Scripts/ASD_CustomUI.js"></script>
+<script src="../Lists/Scripts/ASD_CustomValidation.js"></script>
+<script src="../Lists/Scripts/ASD_Constant.js"></script>
+<script src="../Lists/Scripts/ASD_Object.js"></script>
+<script src="../Lists/Scripts/ASD_Authorization.js"></script>
+<script src="../Lists/Scripts/ASD_HelperScripts.js"></script>
+<script src="../Lists/Scripts/ASD_Workflow.js"></script>
+<script src="../Lists/Scripts/ASD_BusinessDateCalculation.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var siteURL = _spPageContextInfo.siteAbsoluteUrl;
+        var businessOffDateList = ASD_BusinessDateCalculation.getBusinessOffDaysList(siteURL);
+        alert(ASD_BusinessDateCalculation.getNextBusinessDate(siteURL,'09-22-2014',13,businessOffDateList));
+    });
+</script>

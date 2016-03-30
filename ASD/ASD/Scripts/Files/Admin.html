@@ -1,0 +1,178 @@
+﻿<!--//the script reference is different from the CustomForm.html becuase of the relative location of the sharepoint page-->
+
+<script src="../Lists/Scripts/jquery-1.11.1.min.js"></script>
+<script src="../Lists/Scripts/jquery-ui.min.js"></script>
+<script src="../Lists/Scripts/moment.min.js"></script>
+<script src="../Lists/Scripts/ASD_CustomUI.js"></script>
+<script src="../Lists/Scripts/ASD_CustomValidation.js"></script>
+<script src="../Lists/Scripts/ASD_Constant.js"></script>
+<script src="../Lists/Scripts/ASD_Object.js"></script>
+<script src="../Lists/Scripts/ASD_Authorization.js"></script>
+<script src="../Lists/Scripts/ASD_HelperScripts.js"></script>
+<script src="../Lists/Scripts/ASD_Workflow.js"></script>
+<script src="../Lists/Scripts/ASD_BusinessDateCalculation.js"></script>
+<link type="text/css" href="../Lists/Scripts/asd.css" rel="stylesheet" />
+<link type="text/css" href="../Lists/Scripts/jquery-ui.min.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    ///<reference path="ASD_Constant.js" />
+    ///<reference path="ASD_Object.js" />
+    ///<reference path="ASD_HelperScripts.js" />
+    jQuery( document ).ready( function () {
+        ASD_SPContextObj.populateData();//call first to populate context data
+
+        //Only CO can click the button to run the re-calculation
+        if ( ASD_CurrentLoginPermissionLevel.DoesUserBelongsToGroup( ASD_SPContextObj.siteAbsoluteUrl, ASD_SPContextObj.userId, ASD_Enum_Group.CO_Group ) ) {
+            //register Calculate Date button
+            $( "#btnDateCalculate" ).click( function ( event ) {
+                event.preventDefault();
+                //ASD_SPContextObj.populateData();
+                UpdateRequests( ASD_SPContextObj.siteAbsoluteUrl );
+            } );
+
+            //Register test button
+            $( "#btnTest" ).click( function ( event ) {
+                event.preventDefault();
+                ASD_HelperScripts.insertLogListItem("test item");
+            } );
+        } else {
+            ASD_HelperScripts.insertLogListItem( "Only CO can run the batch to re-calculate the Anticipated Award Date" );
+            $( "#btnDateCalculate" ).prop( "disabled", true );
+        }
+
+
+
+
+    } );
+
+    function UpdateRequests( siteUrl ) {
+        try {
+            var returnValue = ASD_String_Constant.Empty;
+            $.ajax( {
+                async: false,
+                url: getRestQuery( siteUrl ),
+                method: "GET",
+                headers: {
+                    "accept": "application/json; odata=verbose"
+                },
+                success: function ( data ) {
+                    var listItems = data.d.results;
+                    if ( listItems.length > 0 ) {
+                        var strBusinessOffDateList = ASD_BusinessDateCalculation.getBusinessOffDaysList( ASD_SPContextObj.siteAbsoluteUrl );
+                        var count = 0;
+                        var logTable = startLogTable();
+                        jQuery.each( listItems, function ( index, value ) {
+                            if ( typeof ( value[ASD_Request_InternalFieldName.Anticipated_Award_Date] ) !== 'undefined' ) {
+
+                                var strAnticipatedAwardDate = moment.utc( value[ASD_Request_InternalFieldName.Anticipated_Award_Date] ).format( ASD_String_Constant.BusinessDateFormat )
+                                
+                                //only recalculate when anticipated award date has value
+                                if ( strAnticipatedAwardDate.localeCompare( ASD_String_Constant.Empty ) !== 0 ) {
+                                    var strFromDate = value[ASD_Request_InternalFieldName.Assigned_Date].toString();
+
+                                    var strPaltType = value[ASD_Request_InternalFieldName.PALT_Type].toString();
+                                    var strNumberOfDelayDays = value[ASD_Request_InternalFieldName.Delay_Award_Days];
+                                    var reqNumber = value[ASD_Request_InternalFieldName.REQ_Number];
+
+                                    var strNewAnticipatedAwardDate = ASD_HelperScripts.calculatedAnticipadAwardDate( strFromDate, strPaltType, strNumberOfDelayDays, strBusinessOffDateList );
+
+
+                                    //only update item when anticipated award dates are different
+                                    if ( strNewAnticipatedAwardDate.localeCompare( strAnticipatedAwardDate ) !== 0 ) {
+
+
+                                        //update item
+                                        var itemType = value.__metadata.type;
+                                        var item = {
+                                            "__metadata": { "type": itemType },
+                                            "Anticipated_x0020_Award_x0020_Da": strNewAnticipatedAwardDate,
+                                            "Sys_UserAction": ASD_Enum_Sys_USERACTION.SAVE
+                                        };
+
+                                        $.ajax( {
+                                            async: false,
+                                            url: value.__metadata.uri,
+                                            type: "POST",
+                                            contentType: "application/json;odata=verbose",
+                                            data: JSON.stringify( item ),
+                                            headers: {
+                                                "Accept": "application/json;odata=verbose",
+                                                "X-RequestDigest": $( "#__REQUESTDIGEST" ).val(),
+                                                "X-HTTP-Method": "MERGE",
+                                                "If-Match": value.__metadata.etag
+                                            },
+                                            success: function ( data ) {
+                                                count++;
+
+                                                logTable = addRowInLogTable( logTable, reqNumber, strAnticipatedAwardDate, strNewAnticipatedAwardDate );
+
+                                            },
+                                            error: function ( data ) {
+                                                //failure( data );
+                                                ASD_HelperScripts.insertLogListItem( "Fail Update - Admin function" );
+                                            }
+                                        } );
+                                    }
+                                }
+                            }
+                        } );
+
+                        logTable = endLogTable( logTable );
+                        jQuery( "#divResult" ).append( "<span>update " + count + " request(s) - run at " + moment().format() + "</span></br>" );
+                        jQuery( "#divResult" ).append( logTable );
+                    }
+
+                },
+                error: function ( err ) {
+                    // Error
+                    ASD_HelperScripts.insertLogListItem("Error: " + JSON.stringify(err));
+                }
+            } );
+            return returnValue;
+        }
+        catch ( err ) {
+            ASD_HelperScripts.insertLogListItem( "Error: " + JSON.stringify( err ) );
+        }
+    };
+
+    function getRestQuery( siteUrl ) {
+        //http://fdc1s-sp23wfed2/sites/asd/_api/web/Lists/getByTitle('ASD%20Request')/Items?$select=ID&$filter=((REQ_x0020_STATUS eq 'ASSIGNED') or (REQ_x0020_STATUS eq 'HOLD'))
+        //http://fdc1s-sp23wfed2/sites/asd/_api/web/Lists/getByTitle('ASD%20Request')/Items?$select=ID&$filter=(REQ_x0020_STATUS eq 'ASSIGNED')
+        //Only get the ASSIGNED request - Hold request will be recalculated when Hold removed
+        var getString = siteUrl + "/_api/web/Lists/getByTitle('" + ASD_ListName.ASD_Request +
+            "')/Items?$select=ID," + ASD_Request_InternalFieldName.Assigned_Date + "," + ASD_Request_InternalFieldName.PALT_Type + "," +
+            ASD_Request_InternalFieldName.Delay_Award_Days + "," + ASD_Request_InternalFieldName.Anticipated_Award_Date + "," + ASD_Request_InternalFieldName.REQ_Number +
+            "&$filter=(" + ASD_Request_InternalFieldName.REQ_Status +
+            " eq '" + ASD_Enum_REQ_STATUS.ASSIGNED + "')";
+
+        return getString;
+    };
+
+    function startLogTable() {
+        return "<table border='1'><tr><td>REQ #</td><td>Old Anticipated Award Date</td><td>New Anticipated Award Date</td></tr>";
+    }
+
+    function addRowInLogTable( logTable, reqNumber, oldAnticipatedAwardDate, newAnticipatedAwardDate ) {
+        return logTable + "<tr><td>" + reqNumber + "</td><td>" +
+            oldAnticipatedAwardDate + "</td><td>" + newAnticipatedAwardDate + "</td><td></tr>";
+    }
+
+    function endLogTable( logTable ) {
+        return logTable + "</table>";
+    }
+
+</script>
+<div>
+    <p>
+        Please run this function out of business time to avoid performance impact on the system.
+    </p>
+    <input id="btnDateCalculate" type="submit" value="Run Date Calculation" />
+    
+    <br />
+    <input id="btnTest" type="submit" value="Test button" />
+    <div id="divResult">
+
+
+    </div>
+
+</div>

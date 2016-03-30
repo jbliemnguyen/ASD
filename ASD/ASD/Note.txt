@@ -1,0 +1,115 @@
+﻿Plan:
+- Not run the deployment powershell script. Do a backup/restore db to Test and Prod. 
+- Current ASD Project include many items that cannot be reuse. Finish refactoring the project
+	- Remove new feature Mat added: ASD Enhancement.
+	- Change feature name to ASD_v3 to avoid conflict with existing feature.
+	- Publish the project will create a new wsp: ASD_v3.wsp
+	- Add script files from Acq Assisstance list from other solution to Script document library here. Becuase other solution is publish the script to this location
+	- Add custom action for the Acq Ass list from AcqAss solution to Script library in this solution.
+	- Remove all wf, site page and site column, content type from this project.
+	- The solution should only contains script file that canbe redeploy from VS without any problem.
+	- Any changes/modification in future to the SharePoint site should be done throught powershell script or create another solution for assess provision
+	
+Current finish legarcy form and acq form, remaining is the changes to the view. One more change in legacy is waiting for customer feedback. 
+
+
+-----------------------------------------------------------------------------------------------------------------
+ASD Release CCN
+Legacy form
+	+ Manually change fields:
+		+ "If Requested/Funded Outside of CIO, please identify your CIO Point of Contact" --> "If IT product/service and requested/funded outside of CIO, please identify your CIO point of contact"
+		+ "AO/COR Comment" to "COR Comment"
+		+ add descrition to "Have you acquired this product/service before", Add "If Yes, please identify previous contract number and do not include special characters."
+		+ Remove "-" fom default value of "Previous Contract Number"
+		+ Remove "-" fom default value of "Previous BPA Number"
+		+ Change the site Title to "Acquisition Services Division"
+		+ Change "Period of Performance" to "anticipated period of performance"
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+- When change the field name:
+	+ Change the field name on CustomForm.html --> 
+	+ Change the field name on ASD_Constant.js --> ASD_Enum_Field
+	+ check the sharepoint object that holds information of the list: WPQ2FormCtx.ListData (in ASD_Object,js). Make sure the field internal name is still the same.
+	+ add field in the MakeFieldReadOnlyFromREQStatus in ASD_HelperScripts.js
+
+
+
+
+	FeatureID:
+		ASD Enhancement: 5ad2865f-5263-4f1f-94b6-10563c538939
+		ASD: 36943116-5c2e-4f6b-9c17-d034c2a59846
+		Workplan WF: bad5773d-f861-4bad-8aba-aaf9fca4d9a8
+
+
+	WorkPlanWF: 
+	  + The workflow is created using the SP Designer, then Save as template (wsp file)
+	  + User Visual Studio 2013 --> New --> Project --> SharePoint --> Import Solution Package
+	  + Browse to the above wsp file.
+	  + After project is created, click on Feature to find FeatureID. We need it to activate feature by powershell
+	  + The feature may not be activate, follow this article to fix it https://social.technet.microsoft.com/Forums/en-us/be41f1c5-1dfb-4869-9a52-1c93902bfd91/microsoftworkflowclientactivitynotfoundexception-when-deploying-solution-with-workflow
+	  
+
+
+
+
+
+
+***************************************************************************************************************************************************************************************
+Above ariticle (in case it is removed)
+
+	  The "Elements.xml" file, which is packaged within the "wsp" solution file 
+contains 2 "<File" elements. One file element 
+represents the XAML file, and the other represents the WF association file.
+
+In comparing the Elements.xml file from a working/deployable version to a 
+version which results in the specified error, you can see that the 
+"WSPublishState" property value differs in the working and non-working versions 
+of the file.  In the working version, the WSPublishState value for each 
+"<File" element are the same (they both are "3").
+
+In the failing version, the WSPublishState value for 
+each "<File" element differ (one has a value of "3" 
+and the other a value of "1"). (XML messed up in this editor):
+
+PropertyName="WSPublishState"
+Value="3"/>
+
+<
+
+PropertyName="WSPublishState"
+Value="1"/>
+
+Also note that the WSPublishState property is also 
+duplicated within the "MetaInfo" property, so both occurrences should be 
+updated.
+
+Therefore, when the workflow files are published, they 
+are specifying different states which is corrupting the deployment process as it 
+changes how/if the files are published.
+
+The fix is to update the WSPublishState value for both 
+"<File" elements so they match.  The actual value may 
+matter (has not been tested); but if the values are both changed to "3" (to 
+match the working version), then it works.  The resulting files/directories will 
+then need to be re-packaged into a new wsp, which should now deploy 
+correctly.
+
+As to how the values are being set to the wrong values in 
+the first place - this could possibly have something to do with using "Save" 
+instead of "Publish" for the workflow in SP designer, but this is a 
+guess.
+
+The value of the WSPublishState corresponds to the 
+Microsoft.SharePoint.WorkflowServices.StoragePublishState enumeration (viewed 
+using Reflector):
+
+ internal enum StoragePublishState
+{
+    Unchanged,
+    Unpublished,
+    AttemptingPublish,
+    Published,
+    ShouldRetryPublish
+}

@@ -1,0 +1,1 @@
+bin\Debug\ASD_v3.wsp

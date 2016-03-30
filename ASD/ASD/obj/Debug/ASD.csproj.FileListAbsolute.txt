@@ -1,0 +1,12 @@
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\ASD\bin\Debug\ASD.dll
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\ASD\bin\Debug\ASD.pdb
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\ASD\bin\Debug\Microsoft.SharePoint.DesignTime.Activities.dll
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\ASD\obj\Debug\ASD.dll
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\ASD\obj\Debug\ASD.pdb
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\ASD\obj\Debug\ASD.csprojResolveAssemblyReference.cache
+C:\Users\lnguyen\Desktop\Lab\Acquisition Services Division\ASD\ASD\bin\Debug\ASD.dll
+C:\Users\lnguyen\Desktop\Lab\Acquisition Services Division\ASD\ASD\bin\Debug\ASD.pdb
+C:\Users\lnguyen\Desktop\Lab\Acquisition Services Division\ASD\ASD\bin\Debug\Microsoft.SharePoint.DesignTime.Activities.dll
+C:\Users\lnguyen\Desktop\Lab\Acquisition Services Division\ASD\ASD\obj\Debug\ASD.csprojResolveAssemblyReference.cache
+C:\Users\lnguyen\Desktop\Lab\Acquisition Services Division\ASD\ASD\obj\Debug\ASD.dll
+C:\Users\lnguyen\Desktop\Lab\Acquisition Services Division\ASD\ASD\obj\Debug\ASD.pdb

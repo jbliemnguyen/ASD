@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+	<Module Name="wfsvc09fea07a4eed41cd943cbc17e68debb0_pages" Url="wfsvc/09fea07a4eed41cd943cbc17e68debb0" SetupPath="pages" RootWebOnly="FALSE" Path="Files\wfsvc\09fea07a4eed41cd943cbc17e68debb0" xmlns="http://schemas.microsoft.com/sharepoint/">
+		<File Url="WFInitForm.aspx" Type="GhostableInLibrary" IgnoreIfAlreadyExists="false" ReplaceContent="true" Level="Published" Path="WFInitForm.aspx">
+			<Property Name="ContentTypeId" Value="0x01010002546F8CF889E441A0D70D5A37FE316B" />
+			<Property Name="ContentType" Value="Document" />
+			<Property Name="_ModerationStatus" Value="0" />
+			<Property Name="FileDirRef" Value="asd/wfsvc/09fea07a4eed41cd943cbc17e68debb0" />
+			<Property Name="FSObjType" Value="0" />
+			<Property Name="FileLeafRef" Value="WFInitForm.aspx" />
+			<Property Name="MetaInfo" Value="21;#vti_parserversion:SR|15.0.0.4701&#xD;&#xA;Order:SR|1500.00000000000&#xD;&#xA;vti_folderitemcount:IW|0&#xD;&#xA;FSObjType:SR|0&#xD;&#xA;FileDirRef:SR|asd/wfsvc/09fea07a4eed41cd943cbc17e68debb0&#xD;&#xA;vti_charset:SR|utf-8&#xD;&#xA;vti_author:SR|i:0#.w|adferc\\mbramer&#xD;&#xA;vti_setuppath:SR|pages\\WFInitForm.aspx&#xD;&#xA;vti_cachedneedsrewrite:BR|false&#xD;&#xA;vti_foldersubfolderitemcount:IW|0&#xD;&#xA;vti_modifiedby:SR|i:0#.w|adferc\\mbramer&#xD;&#xA;vti_cachedhastheme:BR|false&#xD;&#xA;ContentTypeId:SW|0x01010002546F8CF889E441A0D70D5A37FE316B&#xD;&#xA;ContentType:SR|Document&#xD;&#xA;FileLeafRef:SR|WFInitForm.aspx&#xD;&#xA;vti_privatelistexempt:BW|TRUE&#xD;&#xA;" />
+			<Property Name="Order" Value="1500.00000000000" />
+		</File>
+	</Module>
+</Elements>

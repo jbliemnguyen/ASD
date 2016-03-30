@@ -1,0 +1,286 @@
+﻿<script src="../Scripts/jquery-1.11.1.min.js"></script>
+<script src="../Scripts/jquery-ui.min.js"></script>
+<script src="../Scripts/moment.min.js"></script>
+<script src="../Scripts/jquery.number.min.js"></script>
+<script src="../Scripts/ASD_CustomUI.js"></script>
+<script src="../Scripts/ASD_CustomValidation.js"></script>
+<script src="../Scripts/ASD_Constant.js"></script>
+<script src="../Scripts/ASD_Object.js"></script>
+<script src="../Scripts/ASD_Authorization.js"></script>
+<script src="../Scripts/ASD_HelperScripts.js"></script>
+<script src="../Scripts/ASD_Workflow.js"></script>
+<script src="../Scripts/ASD_BusinessDateCalculation.js"></script>
+<link type="text/css" href="../Scripts/asd.css" rel="stylesheet" />
+<link type="text/css" href="../Scripts/jquery-ui.min.css" rel="stylesheet" />
+<style type="text/css">
+    .ms-formtable {
+        display: none;
+    }
+
+    .ms-formtoolbar {
+        display: none;
+    }
+
+    .ms-core-sideNavBox-removeLeftMargin {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        
+        ASD_CustomUI.replace();
+        ASD_SPContextObj.populateData();//this method should be called first before any other methods becuase it prepares context variables for others
+        ASD_CurrentLoginPermissionLevel.populateData();//this method should be called later after loading context object, it load current user permission level
+
+
+        //set content type header
+        var contentTypeValue = ASD_SPContextObj.ContentType;
+
+        //visible On Hold span
+        if (ASD_SPContextObj.REQStatus.localeCompare(ASD_Enum_REQ_STATUS.HOLD) === 0) {//On Hold
+            jQuery("#spOnHold").removeClass("invisible");
+        }
+
+        //set content type
+        jQuery("#ContentType").text(contentTypeValue);
+
+        //make the attachment box OK button not too far to the right
+        jQuery("#csrAttachmentUploadDiv").attr("style", "width: 800px");
+
+        //make all ribbon custom action buttons invisible, We will visible them later based on user permission and status
+        var asdCustomActions = jQuery("a[id^='FERC.SharePoint.ASD']").addClass("invisible");
+        jQuery("a[id^='Ribbon.ListForm.Edit.Commit.Publish']").addClass("invisible");//Make Save button invisible
+        jQuery("a[id^='Ribbon.ListForm.Edit.Actions.AttachFile']").addClass("invisible");//Make Attach File button invisible
+
+        //set userAction to SAVE, ready to take new userAction or Save (default)
+        jQuery("input[title^='" + ASD_Enum_Field.Sys_USERACTION + "']").val(ASD_Enum_Sys_USERACTION.SAVE);
+
+        //display Required Documents for the content type
+        ASD_HelperScripts.DisplayReqDocsSection(contentTypeValue);
+
+        //make Log field expand/collapse
+        var divObj = jQuery("textarea[title^='" + ASD_Enum_Field.LOG + "']").parent();
+        divObj.append("<span class='highlighGreen'>Click here to expand/collapse the log<br></span>");//inject text for clicking on to expand/collapse
+        var nextDivOjb = divObj.next();//this is div to hold the all logs
+        nextDivOjb.attr("style", "display: none;");//make the div invisible at the first time
+        divObj.click(function () {
+            nextDivOjb.slideToggle(300);
+        });
+
+        //Set currency format for REQ Value
+        jQuery("input[title^='" + ASD_Enum_Field.REQ_VALUE + "']").number(true, 2);
+
+        //$('#price').number(true, 2);
+
+        //set section visibility based on request current status and previous status
+        ASD_Authorization.displaySections(ASD_SPContextObj.REQStatus, ASD_SPContextObj.PreviousREQStatus);
+
+        //turn fields to read only based on request status
+        ASD_HelperScripts.makeFieldReadOnlyFromREQStatus(ASD_SPContextObj.REQStatus);
+
+        //number the fields for easy reference
+        jQuery("td.ferc-formlabel > h3").each(function (i) {
+            $(this).prepend((i + 1) + ". ");
+        });
+
+
+    });
+
+    function PreSaveAction() {
+        ASD_SPContextObj.populateData();//this method should be called first before any other methods becuase it is prepare context variables for others
+
+        //get the user action
+        var sys_UserAction = jQuery("input[title^='" + ASD_Enum_Field.Sys_USERACTION + "']").val();
+
+        //custom validation
+        var validationResult = { message: "<p>Please correct the following errors:</p><ul>", isValidated: true };
+        ASD_CustomValidation.validate(validationResult, sys_UserAction, ASD_SPContextObj.REQStatus);
+        validationResult.message = validationResult.message + "</ul>";
+        var headerSection = jQuery("#validationErrorSection");
+        if (!validationResult.isValidated) {
+
+            //reset userAction back to default value SAVE
+            //senario: user click on Assign, but fail validation, user action has value Assign,
+            //then user click on Save instead, user action is still Assign becuase clickign on Save does not set userAction
+            jQuery("input[title^='" + ASD_Enum_Field.Sys_USERACTION + "']").val(ASD_Enum_Sys_USERACTION.SAVE);
+
+            headerSection.show();
+            headerSection.html(validationResult.message);
+        }
+        else {//success validation
+            //calculated fields -
+            ASD_HelperScripts.calculateFields(ASD_SPContextObj.REQStatus, ASD_SPContextObj.PreviousREQStatus, sys_UserAction);
+            jQuery("#validationErrorSection").hide();
+            headerSection.html("");
+        }
+
+        //scroll to the top page if there is error
+        if (!validationResult.isValidated) {
+            jQuery("#headerSection")[0].scrollIntoView();
+        }
+
+        return validationResult.isValidated;
+    };
+
+    //function isValidated(strUserAction) {
+
+    //}
+
+</script>
+<div id="headerSection" class="headerSection invisible">
+    <p>
+        <span id="ContentType"></span>
+    </p>
+    <div style="font-weight:bold;font-size:14px">
+        <span class="highlighYellow">Required documents:</span>
+        <table id="reqDocsProj" class="invisible">
+            <tr>
+                <td>
+                    <ul>
+                        <li class="highlighYellow">Signed Funded Requisition</li>
+                        <li class="highlighYellow">Description of the Product</li>
+                        <li class="highlighYellow">Provide Detailed Salient Characteristics</li>
+                    </ul>
+                </td>
+                <td style="vertical-align:text-top">
+                    <ul>
+                        <li class="highlighYellow">IGCE (Independent Government Cost Estimate)</li>
+                        <li class="highlighYellow">Market Research Memo</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <table id="reqDocsBPA" class="invisible">
+            <tr>
+                <td>
+                    <ul>
+                        <li class="highlighYellow">Signed Funded Requisition</li>
+                        <li class="highlighYellow">Description of the Product</li>
+                    </ul>
+                </td>
+                <td style="vertical-align:text-top">
+                    <ul>
+                        <li class="highlighYellow">IGCE (Independent Government Cost Estimate)</li>
+                        <li class="highlighYellow">Provide Detailed Salient Characteristics</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <table id="reqDocsOption" class="invisible">
+            <tr>
+                <td>
+                    <ul>
+                        <li class="highlighYellow">Signed Funded Requisition</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <table id="reqDocsChangeOrder" class="invisible">
+            <tr>
+                <td>
+                    <ul>
+                        <li class="highlighYellow">Signed Funded Requisition</li>
+                        <li class="highlighYellow">Provide Detailed Salient Characteristics</li>
+                    </ul>
+                </td>
+                <td style="vertical-align:text-top">
+                    <ul>
+                        <li class="highlighYellow">IGCE (Independent Government Cost Estimate)</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <table id="reqDocsAdministrative" class="invisible">
+            <tr>
+                <td>
+                    <ul>
+                        <li class="highlighYellow">Signed Funded Requisition</li>
+                        <li class="highlighYellow">Provide Detailed Salient Characteristics</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <table id="reqDocsFunding" class="invisible">
+            <tr>
+                <td>
+                    <ul>
+                        <li class="highlighYellow">Signed Funded Requisition</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<div id="validationErrorSection" class="validationErrorSection"></div>
+<div id="externalSection" class="externalSection invisible">
+    <table cellpadding="5" cellspacing="5">
+        <tr>
+            <td>
+                <span id="spOnHold" class="invisible">
+                    <img src='../Scripts/images/hold.jpg' title='On Hold' height='32' width='32'></img>
+                </span>
+            </td>
+        </tr>
+        <tr class="needtoconvert" data-displayname="ACQ Status" isreadonly=true></tr>
+        <tr class="needtoconvert" data-displayname="REQ Status" isreadonly=true></tr>
+        <tr class="needtoconvert" data-displayname="Date Submitted" isreadonly=true></tr>
+        <tr class="needtoconvert" data-displayname="REQ #"></tr>
+        <tr class="needtoconvert" data-displayname="REQ Value"></tr>
+        <tr class="needtoconvert" data-displayname="Project Title"></tr>
+        <tr class="needtoconvert" data-displayname="COR"></tr>
+        <tr class="needtoconvert" data-displayname="Option Year Value"></tr>
+        <tr class="needtoconvert" data-displayname="Is This Option Year Funding?"></tr>
+        <tr class="needtoconvert" data-displayname="Is This Incremental Funding?"></tr>
+        <tr class="needtoconvert" data-displayname="Do These Funds Represent Full Funding For The Current Period of Performance (POP)?"></tr>
+        <tr class="needtoconvert" data-displayname="Does this fully fund the action?"></tr>
+        <tr class="needtoconvert" data-displayname="Desired Delivery /Start Date"></tr>
+        <tr class="needtoconvert" data-displayname="Delivery /Start Date Desired"></tr>
+        <tr class="needtoconvert" data-displayname="Anticipated period of performance"></tr>
+        <tr class="needtoconvert" data-displayname="Period of performance anticipated"></tr>
+        <tr class="needtoconvert" data-displayname="Will the services be required for more than one year?"></tr>
+        <tr class="needtoconvert" data-displayname="Reason for Request"></tr>
+        <tr class="needtoconvert" data-displayname="COR Comment"></tr>
+        <tr class="needtoconvert" data-displayname="Submitting Office"></tr>
+        <tr class="needtoconvert" data-displayname="End User Office"></tr>
+        <tr class="needtoconvert" data-displayname="End User"></tr>
+        <tr class="needtoconvert" data-displayname="Suggested Sources"></tr>
+        <tr class="needtoconvert" data-displayname="Is this an IT product/service?"></tr>
+        <tr class="needtoconvert" data-displayname="If IT product/service, have system compatibility requirements been defined?"></tr>
+        <tr class="needtoconvert" data-displayname="Does the product require Maintenance and Support?"></tr>
+        <tr class="needtoconvert" data-displayname="If IT product/service and requested/funded outside of CIO, please identify your CIO point of contact"></tr>
+        <tr class="needtoconvert" data-displayname="Is this a one-time order?"></tr>
+        <tr class="needtoconvert" data-displayname="Have you acquired this product/service before?"></tr>
+        <tr class="needtoconvert" data-displayname="Previous Contract Number"></tr>
+        <tr class="needtoconvert" data-displayname="Previous BPA Number"></tr>
+        <tr class="needtoconvert" data-displayname="Previous Contractor Name"></tr>
+        <tr class="needtoconvert" data-displayname="Misc Details"></tr>
+        <tr class="needtoconvert" data-displayname="Technical Evaluation Team"></tr>
+        <tr class="needtoconvert" data-displayname="Attachments"></tr>
+    </table>
+</div>
+<div id="internalSection" class="internalSection invisible">
+    <table cellpadding="5" cellspacing="5">
+        <tr class="needtoconvert" data-displayname="ASD Action"></tr>
+        <tr class="needtoconvert" data-displayname="PALT Type"></tr>
+        <tr class="needtoconvert" data-displayname="Contract Specialist Assigned"></tr>
+        <tr class="needtoconvert" data-displayname="Delay Award Days"></tr>
+        <tr class="needtoconvert" data-displayname="Anticipated Award Date" isreadonly=true></tr>
+        <tr class="needtoconvert" data-displayname="Solicitation #"></tr>
+        <tr class="needtoconvert" data-displayname="Solicitation Close Date"></tr>
+        <tr class="needtoconvert" data-displayname="Current Contractor Name"></tr>
+        <tr class="needtoconvert" data-displayname="Current Contract Number"></tr>
+        <tr class="needtoconvert" data-displayname="BPA Call-DO/TO #"></tr>
+        <tr class="needtoconvert" data-displayname="Mod #"></tr>
+        <tr class="needtoconvert" data-displayname="Award Date" isreadonly=true></tr>
+        <tr class="needtoconvert" data-displayname="Award Amount"></tr>
+        <tr class="needtoconvert" data-displayname="Ultimate Completion Date"></tr>
+        <tr class="needtoconvert" data-displayname="Comment"></tr>
+        <tr class="needtoconvert" data-displayname="Funding"></tr>
+        <tr class="needtoconvert" data-displayname="Notice of Intent"></tr>
+        <tr class="needtoconvert" data-displayname="Recompete Package"></tr>
+        <tr class="needtoconvert" data-displayname="Log" isreadonly=true></tr>
+    </table>
+</div>
+<div id="awardDialogConfirmation" title="Are you sure you want to award this request?">
+</div>

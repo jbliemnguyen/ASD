@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="eed228d5-4bb5-4a89-a567-cac6f8aa0e86" solutionId="5dc0d676-7396-400e-9699-be597cd2b4a4" resetWebServer="false" sharePointProductVersion="15.0" name="WorkPlanWF" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="141a01cf-79b1-4a7a-bdad-5c853fc866c0" />
+  </features>
+</package>

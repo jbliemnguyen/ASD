@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Files"  Url="Lists/Scripts">
+    <File Path="Files\CustomForm.html" Url="CustomForm.html" ReplaceContent="TRUE" />
+    <File Path="Files\Admin.html" Url="Admin.html" ReplaceContent="TRUE" />
+    <File Path="Files\TestPage.html" Url="TestPage.html" ReplaceContent="TRUE" />
+    
+    <!--custom javascript files-->
+    <File Path="Files\ASD_CustomUI.js" Url="ASD_CustomUI.js" ReplaceContent="TRUE" />
+    <File Path="Files\ASD_CustomValidation.js" Url="ASD_CustomValidation.js" ReplaceContent="TRUE" />
+    <File Path="Files\ASD_Constant.js" Url="ASD_Constant.js" ReplaceContent="TRUE" />
+    <File Path="Files\ASD_Authorization.js" Url="ASD_Authorization.js" ReplaceContent="TRUE" />
+    <File Path="Files\ASD_Object.js" Url="ASD_Object.js" ReplaceContent ="TRUE" />
+    <File Path="Files\ASD_HelperScripts.js" Url="ASD_HelperScripts.js" ReplaceContent="TRUE" />
+    <File Path="Files\ASD_Workflow.js" Url="ASD_Workflow.js" ReplaceContent="TRUE" />
+    <File Path="Files\ASD_BusinessDateCalculation.js" Url="ASD_BusinessDateCalculation.js" ReplaceContent="TRUE" />
+    <File Path="Files\KPI_JSLink.js" Url="KPI_JSLink.js" ReplaceContent="TRUE" />
+    
+    <!--Acquisition Assistance-->
+    <File Path="Files\AcqAssist\editForm.unmin.js" Url="AcqAssist/editForm.unmin.js" ReplaceContent="TRUE" />
+    <File Path="Files\AcqAssist\formLoader.unmin.js" Url="AcqAssist/formLoader.unmin.js" ReplaceContent="TRUE" />
+    <File Path="Files\AcqAssist\newForm.unmin.js" Url="AcqAssist/newForm.unmin.js" ReplaceContent="TRUE" />
+    <File Path="Files\AcqAssist\spAPI.unmin.js" Url="AcqAssist/spAPI.unmin.js" ReplaceContent="TRUE" />
+    <File Path="Files\AcqAssist\form.css" Url="AcqAssist/form.css" ReplaceContent="TRUE" />
+    
+    <!--style-->
+    <File Path="Files\asd.css" Url="asd.css" ReplaceContent="TRUE" />
+    
+    <!--javascript library-->
+    <File Path="Files\jquery-1.11.1.min.js" Url="jquery-1.11.1.min.js" />
+    <File Path="Files\jquery-ui.min.css" Url="jquery-ui.min.css" />
+    <File Path="Files\jquery-ui.min.js" Url="jquery-ui.min.js" />
+    <File Path="Files\moment.min.js" Url="moment.min.js" />
+    <File Path="Files\jquery.number.min.js" Url="jquery.number.min.js" />
+
+    <!--jquery ui pictures-->
+    <File Path="Files\images\ui-bg_diagonals-thick_18_b81900_40x40.png" Url="images/ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <File Path="Files\images\ui-bg_diagonals-thick_20_666666_40x40.png" Url="images/ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <File Path="Files\images\ui-bg_flat_10_000000_40x100.png" Url="images/ui-bg_flat_10_000000_40x100.png" />
+    <File Path="Files\images\ui-bg_glass_65_ffffff_1x400.png" Url="images/ui-bg_glass_65_ffffff_1x400.png" />
+    <File Path="Files\images\ui-bg_glass_100_f6f6f6_1x400.png" Url="images/ui-bg_glass_100_f6f6f6_1x400.png" />
+    <File Path="Files\images\ui-bg_glass_100_fdf5ce_1x400.png" Url="images/ui-bg_glass_100_fdf5ce_1x400.png" />
+    <File Path="Files\images\ui-bg_gloss-wave_35_f6a828_500x100.png" Url="images/ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <File Path="Files\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" Url="images/ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <File Path="Files\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" Url="images/ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <File Path="Files\images\ui-icons_228ef1_256x240.png" Url="images/ui-icons_228ef1_256x240.png" />
+    <File Path="Files\images\ui-icons_222222_256x240.png" Url="images/ui-icons_222222_256x240.png" />
+    <File Path="Files\images\ui-icons_ef8c08_256x240.png" Url="images/ui-icons_ef8c08_256x240.png" />
+    <File Path="Files\images\ui-icons_ffd27a_256x240.png" Url="images/ui-icons_ffd27a_256x240.png" />
+    <File Path="Files\images\ui-icons_ffffff_256x240.png" Url="images/ui-icons_ffffff_256x240.png" />
+    
+    
+    <!--ribbon pictures-->
+    <File Path="Files\images\submit_32_32.png" Url="images/submit_32_32.png" />
+    <File Path="Files\images\approve_32_32.png" Url="images/approve_32_32.png" />
+    <File Path="Files\images\assign_32_32.png" Url="images/assign_32_32.png" />
+    <File Path="Files\images\hold_32_32.png" Url="images/hold_32_32.png" />
+    <File Path="Files\images\reject_32_32.png" Url="images/reject_32_32.png" />
+    <File Path="Files\images\return_32_32.png" Url="images/return_32_32.png" />
+    <File Path="Files\images\review_32_32.png" Url="images/review_32_32.png" />
+    <File Path="Files\images\reward_32_32.png" Url="images/reward_32_32.png" />
+    <File Path="Files\images\release.jpg" Url="images/release.jpg" />
+    <File Path="Files\images\hold.jpg" Url="images/hold.jpg" />
+    <File Path="Files\jquery.number.min.js" Url="Files/jquery.number.min.js" />
+  </Module>
+</Elements>

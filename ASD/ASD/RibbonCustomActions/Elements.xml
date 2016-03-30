@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction
+   Id="FERC.SharePoint.ASD.CustomAction.RequestList"
+   Location="CommandUI.Ribbon"
+   RegistrationId="b840fce5-781f-49d1-a529-4ee0407baea5"
+   RegistrationType="List"
+   Sequence="20">
+    <CommandUIExtension>
+      <CommandUIDefinitions>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnSubmit"
+                  Sequence="1"
+                  Command="FERC.SharePoint.ASD.Submit"
+                  Image32by32="Lists/Scripts/images/submit_32_32.png"
+                  Description="Submit ASD Request"
+                  LabelText="Submit"
+                  ToolTipDescription="Submit this ASD request for AO approval"                  
+                  ToolTipTitle="Submit"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnApprove"
+                  Sequence="2"
+                  Command="FERC.SharePoint.ASD.Approve"
+                  Image32by32="Lists/Scripts/images/approve_32_32.png"
+                  Description="Approve ASD Request"
+                  LabelText="Approve"
+                  ToolTipDescription="Approve this ASD request"
+                  ToolTipTitle="Approve"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnReject"
+                  Sequence="3"
+                  Command="FERC.SharePoint.ASD.Reject"
+                  Image32by32="Lists/Scripts/images/reject_32_32.png"
+                  Description="Reject ASD Request"
+                  LabelText="Reject"
+                  ToolTipDescription="Reject this ASD request"
+                  ToolTipTitle="Reject"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnCancelRequest"
+                  Sequence="4"
+                  Command="FERC.SharePoint.ASD.CancelRequest"
+                  Image32by32="/_layouts/15/1033/images/formatmap32x32.png"
+                  Description="Cancel Request"
+                  LabelText="Cancel Request"
+                  ToolTipDescription="Cancel this ASD request"
+                  ToolTipTitle="Cancel ASD Request"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnReview"
+                  Sequence="5"
+                  Command="FERC.SharePoint.ASD.Review"
+                  Image32by32="Lists/Scripts/images/review_32_32.png"
+                  Description="Review"
+                  LabelText="Review"
+                  ToolTipDescription="CO review ASD request"
+                  ToolTipTitle="Review"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnAssign"
+                  Sequence="6"
+                  Command="FERC.SharePoint.ASD.Assign"
+                  Image32by32="Lists/Scripts/images/assign_32_32.png"
+                  Description="Assign"
+                  LabelText="Assign"
+                  ToolTipDescription="Assign ASD request to contract specialist"
+                  ToolTipTitle="Assign"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnRequirementCancel"
+                  Sequence="7"
+                  Command="FERC.SharePoint.ASD.RequirementCancel"
+                  Image32by32="/_layouts/15/1033/images/formatmap32x32.png"
+                  Description="Requirement Cancel"
+                  LabelText="Requirement Cancel"
+                  ToolTipDescription="Requirement Cancel"
+                  ToolTipTitle="Requirement Cancel"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnReturn"
+                  Sequence="7"
+                  Command="FERC.SharePoint.ASD.Return"
+                  Image32by32="Lists/Scripts/images/return_32_32.png"
+                  Description="Return"
+                  LabelText="Return"
+                  ToolTipDescription="Return this ASD request to its submitter"
+                  ToolTipTitle="Return"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnHold"
+                  Sequence="8"
+                  Command="FERC.SharePoint.ASD.Hold"
+                  Image32by32="Lists/Scripts/images/hold_32_32.png"
+                  Description="Hold"
+                  LabelText="Hold"
+                  ToolTipDescription="Put this ASD request on hold"
+                  ToolTipTitle="Hold"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnRelease"
+                  Sequence="9"
+                  Command="FERC.SharePoint.ASD.Release"
+                  Image32by32="Lists/Scripts/images/release.jpg"
+                  Description="Hold Release"
+                  LabelText="Hold Release"
+                  ToolTipDescription="Release ASD request from Hold"
+                  ToolTipTitle="Hold Release"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnAward"
+                  Sequence="9"
+                  Command="FERC.SharePoint.ASD.Award"
+                  Image32by32="Lists/Scripts/images/reward_32_32.png"
+                  Description="Award"
+                  LabelText="Award"
+                  ToolTipDescription="Award this ASD request"
+                  ToolTipTitle="Award"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+      </CommandUIDefinitions>
+      <CommandUIHandlers>
+        <CommandUIHandler
+          Command="FERC.SharePoint.ASD.Submit"
+          CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnSubmit');" />
+        <CommandUIHandler
+          Command="FERC.SharePoint.ASD.Approve"
+          CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnApprove');" />
+        <CommandUIHandler
+          Command="FERC.SharePoint.ASD.Reject"
+          CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnReject');" />
+        <CommandUIHandler
+            Command="FERC.SharePoint.ASD.CancelRequest"
+            CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnCancelRequest');" />
+        <CommandUIHandler
+              Command="FERC.SharePoint.ASD.Review"
+              CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnReview');" />
+        <CommandUIHandler
+              Command="FERC.SharePoint.ASD.Assign"
+              CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnAssign');" />
+        <CommandUIHandler
+              Command="FERC.SharePoint.ASD.Return"
+              CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnReturn');" />
+        <CommandUIHandler
+              Command="FERC.SharePoint.ASD.Hold"
+              CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnHold');" />
+        <CommandUIHandler
+              Command="FERC.SharePoint.ASD.Release"
+              CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnRelease');" />
+        <CommandUIHandler
+              Command="FERC.SharePoint.ASD.Award"
+              CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnAward');" />
+        <CommandUIHandler
+              Command="FERC.SharePoint.ASD.RequirementCancel"
+              CommandAction="javascript:ASD_HelperScripts.RibbonCustomButtonClick('btnRequirementCancel');" />
+      </CommandUIHandlers>
+    </CommandUIExtension>
+  </CustomAction>
+  <CustomAction
+   Id="FERC.SharePoint.ASD.CustomAction.AcquistionAssistList"
+   Location="CommandUI.Ribbon"
+   RegistrationId="7f9c173e-d955-4d51-9ffb-94ea839dac66"
+   RegistrationType="List"
+   Sequence="20">
+    <CommandUIExtension>
+      <CommandUIDefinitions>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnSubmit"
+                  Sequence="1"
+                  Command="FERC.SharePoint.ASD.Submit"
+                  Image32by32="Lists/Scripts/images/submit_32_32.png"
+                  Description="Submit Acquisition Assistance Request"
+                  LabelText="Submit"
+                  ToolTipDescription="Submit this Acquisition Assistance request for COR approval- Liem"
+                  ToolTipTitle="Submit"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnApprove"
+                  Sequence="2"
+                  Command="FERC.SharePoint.ASD.Approve"
+                  Image32by32="Lists/Scripts/images/approve_32_32.png"
+                  Description="Approve Acquisition Assistance Request"
+                  LabelText="Approve"
+                  ToolTipDescription="Approve this Acquisition Assistance request."
+                  ToolTipTitle="Approve"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnAssign"
+                  Sequence="3"
+                  Command="FERC.SharePoint.ASD.Assign"
+                  Image32by32="Lists/Scripts/images/assign_32_32.png"
+                  Description="Assign"
+                  LabelText="Assign"
+                  ToolTipDescription="Assign Acquisition Assistance request to Contract Specialist."
+                  ToolTipTitle="Assign"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnCancelRequest"
+                  Sequence="4"
+                  Command="FERC.SharePoint.ASD.CancelRequest"
+                  Image32by32="/_layouts/15/1033/images/formatmap32x32.png"
+                  Description="Cancel Request"
+                  LabelText="Cancel Request"
+                  ToolTipDescription="Cancel this Acquisition Assistance request."
+                  ToolTipTitle="Cancel Acquisition Assistance Request"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+        <CommandUIDefinition Location="Ribbon.ListForm.Edit.Commit.Controls._children">
+          <Button Id="FERC.SharePoint.ASD.btnComplete"
+                  Sequence="5"
+                  Command="FERC.SharePoint.ASD.Complete"
+                  Image32by32="Lists/Scripts/images/reward_32_32.png"
+                  Description="Complete"
+                  LabelText="Complete"
+                  ToolTipDescription="Complete this Acquisition Assistance Request."
+                  ToolTipTitle="Complete"
+                  TemplateAlias="o1"/>
+        </CommandUIDefinition>
+      </CommandUIDefinitions>
+      <CommandUIHandlers>
+        <CommandUIHandler
+          Command="FERC.SharePoint.ASD.Submit"
+          CommandAction="javascript:$sp.customAction($sp.enums.appStates.submitted);" />
+        <CommandUIHandler
+          Command="FERC.SharePoint.ASD.Approve"
+          CommandAction="javascript:$sp.customAction($sp.enums.appStates.approved);" />
+        <CommandUIHandler
+              Command="FERC.SharePoint.ASD.Assign"
+              CommandAction="javascript:$sp.customAction($sp.enums.appStates.assigned);" />
+        <CommandUIHandler
+            Command="FERC.SharePoint.ASD.CancelRequest"
+            CommandAction="javascript:$sp.customAction($sp.enums.appStates.cancelled);" />
+        <CommandUIHandler
+             Command="FERC.SharePoint.ASD.Complete"
+             CommandAction="javascript:$sp.customAction($sp.enums.appStates.completed);" />
+      </CommandUIHandlers>
+    </CommandUIExtension>
+  </CustomAction>
+</Elements>

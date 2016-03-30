@@ -1,0 +1,4 @@
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\WorkPlanWF\bin\Debug\WorkPlanWF.dll
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\WorkPlanWF\bin\Debug\WorkPlanWF.pdb
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\WorkPlanWF\obj\Debug\WorkPlanWF.dll
+C:\Users\lnguyen\Desktop\Lab\ASD\ASD\WorkPlanWF\obj\Debug\WorkPlanWF.pdb

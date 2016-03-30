@@ -1,0 +1,143 @@
+**********************
+Windows PowerShell transcript start
+Start time: 20151106162002
+Username: ADFERC\lnguyen
+RunAs User: ADFERC\lnguyen
+Machine: FDC1S-SP23WFED2 (Microsoft Windows NT 6.3.9600.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe -NoExit  & ' C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\15\CONFIG\POWERSHELL\Registration\\sharepoint.ps1 ' 
+Process ID: 1196
+**********************
+Transcript started, output file is C:\Users\lnguyen\Desktop\Lab\ASD\ASD\ASD\Dep
+loyment\ASD-Deployment.log
+Start time: 11/06/2015 16:20:02
+Deploying to https://FDC1S-SP23WFED2.ferc.gov/asd
+
+Disabling ASD Feature...
+Disabled ASD Feature.
+Updating ASD.wsp to ASD_v2.wsp
+Successfully updated: ASD_v2.wsp
+
+Deploying AcqAssist.EmailWF.wsp
+Successfully deployed: AcqAssist.EmailWF.wsp
+
+Deploying AcqAssist.wsp
+Successfully deployed: AcqAssist.wsp
+
+Deploying WorkPlanWF.wsp
+Successfully deployed: WorkPlanWF.wsp
+
+Enabling features...
+The features are enabled.
+Adding site columns to content types...
+Adding new field to ASD Base Content Type.
+New field SysIsAwarded was added to site column.
+New field SysIsAwarded was added to ASD Base Content Type.
+Adding Funding to Product
+Adding Funding to Product With Incidental Services
+Adding Funding to Services
+Adding Funding to BPA Call Or Task Delivery Order
+Adding Funding to Change Order - Supplemental Agreement
+Adding Funding to Exercising an Option Year
+Adding Notice of Intent to Product
+Adding Notice of Intent to Product With Incidental Services
+Adding Notice of Intent to Services
+Adding Notice of Intent to BPA Call Or Task Delivery Order
+Adding Notice of Intent to Change Order - Supplemental Agreement
+Adding Notice of Intent to Exercising an Option Year
+Adding Recompete Package to Product
+Adding Recompete Package to Product With Incidental Services
+Adding Recompete Package to Services
+Adding Recompete Package to BPA Call Or Task Delivery Order
+Adding Recompete Package to Change Order - Supplemental Agreement
+Adding Recompete Package to Exercising an Option Year
+Adding site columns to content types is finished.
+Enabling ASD Workflow...
+ASD Workflow enabled.
+Setting Acquisition Assistance Form # for unique values...
+Finished setting Acquisition Assistance Form # for unique values.
+Disabling Acquisition Assistance grid editing...
+Finished disabling Acquisition Assistance grid editing.
+Creating Contract Specialist group...
+Contract Specialist group was created.
+Adding users to Contract Specialist group...
+Added users to Contract Specialist group.
+Successfully added Read permission to ALJ group in Work Plan list.
+Successfully added Read permission to ASD Admin group in Work Plan list.
+Successfully added Read permission to ASD Members group in Work Plan list.
+Successfully added Read permission to ASD Owners group in Work Plan list.
+Successfully added Read permission to ASD Users group in Work Plan list.
+Successfully added Read permission to ASD Visitors group in Work Plan list.
+Successfully added Read permission to CDC group in Work Plan list.
+Successfully added Read permission to CFO group in Work Plan list.
+Successfully added Read permission to CH1 group in Work Plan list.
+Successfully added Read permission to CIO group in Work Plan list.
+Successfully added Edit permission to CO group in Work Plan list.
+Successfully added Read permission to CO2 group in Work Plan list.
+Successfully added Read permission to CO3 group in Work Plan list.
+Successfully added Read permission to CO4 group in Work Plan list.
+Successfully added Read permission to CO5 group in Work Plan list.
+Successfully added Edit permission to Contract Specialists group in Work Plan l
+ist.
+Successfully added Read permission to DFM group in Work Plan list.
+Successfully added Read permission to DFS group in Work Plan list.
+Successfully added Read permission to DHL group in Work Plan list.
+Successfully added Read permission to DLM group in Work Plan list.
+Successfully added Read permission to DOB group in Work Plan list.
+Successfully added Read permission to DOP group in Work Plan list.
+Successfully added Read permission to DPG group in Work Plan list.
+Successfully added Read permission to DRS group in Work Plan list.
+Successfully added Read permission to DSI group in Work Plan list.
+Successfully added Read permission to EEO group in Work Plan list.
+Successfully added Read permission to EMR group in Work Plan list.
+Successfully added Read permission to EPI group in Work Plan list.
+Successfully added Read permission to Excel Services Viewers group in Work Plan
+ list.
+Successfully added Read permission to FER group in Work Plan list.
+Successfully added Read permission to FPB group in Work Plan list.
+Successfully added Read permission to GEE group in Work Plan list.
+Successfully added Read permission to HAC group in Work Plan list.
+Successfully added Read permission to HCO group in Work Plan list.
+Successfully added Read permission to HRS group in Work Plan list.
+Successfully added Read permission to IAB group in Work Plan list.
+Successfully added Read permission to IPG group in Work Plan list.
+Successfully added Read permission to ISS group in Work Plan list.
+Successfully added Read permission to ITO group in Work Plan list.
+Successfully added Read permission to ITP group in Work Plan list.
+Successfully added Read permission to OAL group in Work Plan list.
+Successfully added Read permission to OBM group in Work Plan list.
+Successfully added Read permission to OEA group in Work Plan list.
+Successfully added Read permission to OED group in Work Plan list.
+Successfully added Read permission to OEP group in Work Plan list.
+Successfully added Read permission to OER group in Work Plan list.
+Successfully added Read permission to OGC group in Work Plan list.
+Successfully added Read permission to PAI group in Work Plan list.
+Successfully added Read permission to RDB group in Work Plan list.
+Successfully added Read permission to SCB group in Work Plan list.
+Successfully added Read permission to SEC group in Work Plan list.
+Successfully added Read permission to SSS group in Work Plan list.
+Finished configuring Work Plan list permissions.
+Deleting the Business Days Off quick launch link...
+Deleting the My Assignments quick launch link...
+Deleting the Recent quick launch link...
+All quick launch links are deleted.
+Adding quick launch links...
+
+Added REQ Status to the Quick Launch.
+Added Acquisition Assistance Status to the Quick Launch.
+Added Contracts Library to the Quick Launch.
+Added WorkLoad to the Quick Launch.
+Added Work Plan to the Quick Launch.
+Added My Assignments to the Quick Launch.
+Added Business Days Off to the Quick Launch.
+Added Admin to the Quick Launch.
+
+Finished adding quick launch links.
+Enabling ASD Feature...
+ASD Feature re-enabled.
+
+
+End time: 11/06/2015 16:20:48
+**********************
+Windows PowerShell transcript end
+End time: 20151106162048
+**********************
